@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: JavidDitty/setup-cintent@v1
+      
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
@@ -29,6 +29,10 @@ jobs:
           pip install pipenv
           python --version; pip --version; pipenv --version
           pipenv run pip install flask==${{ matrix.flask-version }}
+
+      - uses: JavidDitty/setup-cintent@3638849e94bdb037f0a405375686a8550e6df904
+        with:
+          nonblocking: false
       - name: Run tests
         run: |
           make check
