@@ -8,7 +8,7 @@ on: workflow_dispatch
 jobs:
   tests:
     name: Python ${{ matrix.python-version }} Flask ${{ matrix.flask-version }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     environment: test
 
     strategy:
