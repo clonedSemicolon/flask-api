@@ -26,11 +26,13 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install pipenv
-          python --version; pip --version; pipenv --version
-          export PIPENV_VENV_IN_PROJECT=true
-          pipenv install --dev
-          pipenv run pip install flask==${{ matrix.flask-version }}
+          pip install flask==${{ matrix.flask-version }}
+          pip install -e .
+          pip install -r requirements-dev.txt
+          pip install pytest pytest-cov
+          # Verify everything is ready
+          python -c "import flask_api; print('flask_api OK')"
+          pytest --version
 
       - uses: clonedSemicolon/setup-cintent@main
       - name: Run tests
