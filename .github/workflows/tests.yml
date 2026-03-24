@@ -37,7 +37,7 @@ jobs:
       - uses: clonedSemicolon/setup-cintent@main
       - name: Run tests
         run: |
-          make test
+          pytest --cov=flask_api flask_api
         env:
           RANDOM_SEED: 0
 
