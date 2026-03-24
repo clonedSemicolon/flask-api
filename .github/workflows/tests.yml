@@ -28,6 +28,8 @@ jobs:
           pip install --upgrade pip
           pip install pipenv
           python --version; pip --version; pipenv --version
+          export PIPENV_VENV_IN_PROJECT=true
+          pipenv install --dev
           pipenv run pip install flask==${{ matrix.flask-version }}
 
       - uses: clonedSemicolon/setup-cintent@main
