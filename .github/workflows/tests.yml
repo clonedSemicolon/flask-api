@@ -30,9 +30,7 @@ jobs:
           python --version; pip --version; pipenv --version
           pipenv run pip install flask==${{ matrix.flask-version }}
 
-      - uses: clonedSemicolon/cintent_v3@v1
-        with: 
-          nonblocking: false
+      - uses: clonedSemicolon/setup-cintent@main
       - name: Run tests
         run: |
           make check
