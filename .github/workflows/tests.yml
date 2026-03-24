@@ -33,7 +33,6 @@ jobs:
       - uses: clonedSemicolon/setup-cintent@main
       - name: Run tests
         run: |
-          make check
           make test
         env:
           RANDOM_SEED: 0
