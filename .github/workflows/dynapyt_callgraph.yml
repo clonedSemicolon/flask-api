@@ -1,0 +1,49 @@
+# ===================================================================
+# DynaPyt CallGraph — flask-api
+#
+# Add this to your fork of flask-api:
+#   .github/workflows/dynapyt-callgraph.yml
+#
+# Triggers: manual (workflow_dispatch)
+# Artifacts: dynapyt.json (call graph)
+# ===================================================================
+
+name: DynaPyt CallGraph
+
+on:
+  workflow_dispatch:
+
+jobs:
+  callgraph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      # ── Project setup ────────────────────────────────────────
+      - name: Install dev dependencies
+        run: |
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      # ── DynaPyt ──────────────────────────────────────────────
+      #    With editable install (-e .), flask_api/ in the repo
+      #    IS the installed package — instrument it directly.
+      - uses: clonedSemicolon/setup-dynapyt@main
+        with:
+          directory: flask_api/
+
+      - name: Run tests
+        run: pytest flask_api/tests -v
+
+      - name: Upload DynaPyt Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dynapyt-flask-api
+          path: dynapyt.json
+          retention-days: 30
