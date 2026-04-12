@@ -33,7 +33,7 @@ jobs:
       # ── DynaPyt ──────────────────────────────────────────────
       #    With editable install (-e .), flask_api/ in the repo
       #    IS the installed package — instrument it directly.
-      - uses: clonedSemicolon/seytup-dynapyt@main
+      - uses: clonedSemicolon/seytup-dynapyt@master
         with:
           directory: flask_api/
 
